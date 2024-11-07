@@ -54,16 +54,16 @@ I do more thorough automated testing from com.yieldstreet.AssignmentApplicationT
 leveraging the MySQL and RabbitMQ backends and TestContainers Spring project - so no mocking is used here. This
 integration test covers the following flow:
 
-		// POST good accreditation
-		// POST second one for same userId, this should fail because of pending accreditation on userId
-		// GET the first accreditation, so we verify it was created
-		// PUT a bad accreditation to check the HTTP status code
-		// PUT a good accreditation to modify the state, asynchronous processing so do a little delay at the end
-		// GET the first accreditation to verify it was changed to CONFIRMED by doPUT, in a minute check it was pushed to EXPIRED
-		// POST second one again, this should work now because of first pending accreditation having move into CONFIRMED
-		// GET the users accreditations just to check we have 2 now
-		// GET the first accreditation to check it was pushed to EXPIRED, the 1 minute delay is configured in the test context
-		// GET the history of the first accreditation, it should be PENDING->CONFIRMED (EXPIRED is not in the history since its current)
+	POST good accreditation
+	POST second one for same userId, this should fail because of pending accreditation on userId
+	GET the first accreditation, so we verify it was created
+	PUT a bad accreditation to check the HTTP status code
+	PUT a good accreditation to modify the state, asynchronous processing so do a little delay at the end
+	GET the first accreditation to verify it was changed to CONFIRMED by doPUT, in a minute check it was pushed to EXPIRED
+	POST second one again, this should work now because of first pending accreditation having move into CONFIRMED
+	GET the users accreditations just to check we have 2 now
+	GET the first accreditation to check it was pushed to EXPIRED, the 1 minute delay is configured in the test context
+	GET the history of the first accreditation, it should be PENDING->CONFIRMED (EXPIRED is not in the history since its current)
 
 I did not put any unit tests in, due to time. If i had more time i would put one around the RabbitReceiver to test the state transitions.
 I would probably use mocking there to reduce dependency on the repository layer.
@@ -147,9 +147,13 @@ Questions
 *************
 My answers to the questions are below the questions, tagged as "[PB]"
 
+
+
 Question a)	Please provide an overview of the architecture, briefly mentioning the applied architectural patterns.
 
  [PB] see above, three tier architecture, eventual consistency, point-to-point messaging, database transactions, state machine to handle status transitions, DTOs, REST
+
+
 
 Question b)	The  endpoints can be hit separately by different administrators, triggering multiple concurrent updates to the same accreditation status.
 Please outline a high level solution which ensures that the checks outlined in 4) are always consistent with the latest state of the accreditation status.
@@ -157,6 +161,8 @@ Please outline a high level solution which ensures that the checks outlined in 4
  [PB] I would use a version number on the accreditation. Then we can do optimistic locking. This needs an extra field in the accreditation entity. Hibernate
  can manage this for you. Essentially, if you are holding a stale version of an accreditation , you wont have the latest version number on it. When you try
  and update with it, it will be rejected and you will need to pull the latest version of that accreditation and try again.
+
+
 
 Question c)	Should the client facing traffic increase multiple fold, both the admin facing endpoints would be affected along with client facing API by
 virtue of being part of the same service. Please provide an outline of the steps you would take to ensure that Yieldstreet’s client facing
