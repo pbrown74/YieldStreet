@@ -12,7 +12,7 @@ Issues
 
 Installation:
 ****************
-Clone the repo from https://github.com/pbrown74/yieldstreet
+Clone the repo from https://github.com/pbrown74/YieldStreet
 
 Change directory to the root and build using the following steps.
 (I bundled the pre-built JAR so you don't have to build, you can jump to Docker steps if you want)
