@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # pull the project from github
-git clone https://github.com/pbrown74/yieldstreet
+git clone https://github.com/pbrown74/YieldStreet
 
 # build the assignment Docker image
 docker build -t assignment-0.0.1 .
