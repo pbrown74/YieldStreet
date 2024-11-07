@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "cd9cd335-ffe4-4ad4-9c6a-1f89b9b3d6f0",
+		"name": "YieldStreet Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26805553",
+		"_collection_link": "https://blue-sunset-993581.postman.co/workspace/Spring-Boot-REST-API-Workspace~4a204aee-1760-4b3e-b299-19357482c27b/collection/26805553-cd9cd335-ffe4-4ad4-9c6a-1f89b9b3d6f0?action=share&source=collection_link&creator=26805553"
+	},
+	"item": [
+		{
+			"name": "Insert Accreditation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_id\": \"g8NlYJnk7zK9BlB1J2Ebjs0AkhCTpE1V\",\r\n  \"accreditation_type\": \"BY_INCOME\",\r\n  \"document\": {\r\n     \"name\": \"2018.pdf\",\r\n     \"mime_type\": \"application/pdf\",\r\n     \"content\": \"ICAiQC8qIjogWyJzcmMvKiJdCiAgICB9CiAgfQp9Cg==\"\r\n   }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm Accreditation",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"outcome\": \"CONFIRMED\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation/:accreditationId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation",
+						":accreditationId"
+					],
+					"variable": [
+						{
+							"key": "accreditationId",
+							"value": "9fb1dab0-b019-4af6-8a5d-271e26703226"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail Accreditation",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"outcome\": \"FAILED\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation/:accreditationId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation",
+						":accreditationId"
+					],
+					"variable": [
+						{
+							"key": "accreditationId",
+							"value": "602eb9b7-e9d7-4233-a98c-b7559b5993c5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Expire Accreditation",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"outcome\": \"EXPIRED\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/accreditation/:accreditationId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"accreditation",
+						":accreditationId"
+					],
+					"variable": [
+						{
+							"key": "accreditationId",
+							"value": "9fb1dab0-b019-4af6-8a5d-271e26703226"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Accreditations",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/:userId/accreditation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						":userId",
+						"accreditation"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "g8NlYJnk7zK9BlB1J2Ebjs0AkhCTpE1V"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Accreditations History TOFIX",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/user/history/:accreditationId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"user",
+						"history",
+						":accreditationId"
+					],
+					"variable": [
+						{
+							"key": "accreditationId",
+							"value": "9fb1dab0-b019-4af6-8a5d-271e26703226"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
